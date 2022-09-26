@@ -6,5 +6,4 @@ class Requests_nba_server:
     def get_nba_leagues_by_year(year):
         res = requests.get(
             f"http://data.nba.net/10s/prod/v1/{year}/players.json")
-        print(res)
         return res.json().get("league")

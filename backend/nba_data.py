@@ -18,11 +18,14 @@ class NBA_data:
         if len(self.leagues_arr) == 0:
             raise ValueError("The leagues array is empty")
         else:
-            player_arr = []
+            players_arr = []
             for league in self.leagues_arr:
-                player_arr += [Player(player)
-                               for player in self.leagues_arr[league]]
-            return player_arr
+                players_arr += [Player(player)
+                                for player in self.leagues_arr[league]]
+            return players_arr
 
-    # def get_players_arr_by_team_name(self,team_name):
-    #     return filter(lambda player)
+    def get_players_arr_by_team_name(self, team_name):
+        players_arr = self.get_players_arr()
+        print(players_arr[0].team_id)
+        return list(filter(lambda player: player.team_id ==
+                           teams_id[team_name], players_arr))
