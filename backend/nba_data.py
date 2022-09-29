@@ -1,4 +1,3 @@
-import numpy as np
 from requests_nba_server import Requests_nba_server
 from player import Player
 from team_id import teams_id
