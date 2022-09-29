@@ -15,11 +15,11 @@ def root():
     return FileResponse('./fronted/index.html')
 
 
-@app.get('/players')
-def get_players():
+@app.get('/players/{team_name}/{year}')
+def get_players(team_name, year):
     data = NBA_data()
-    data.fetch_leagues_by_year(2018)
-    return data.get_players_arr_by_team_name("lakers")
+    data.fetch_leagues_by_year(year)
+    return data.get_players_arr_by_team_name(team_name)
 
 
 if __name__ == "__main__":
