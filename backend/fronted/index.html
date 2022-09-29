@@ -3,6 +3,10 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script
+            src="https://code.jquery.com/jquery-3.6.0.js"
+            crossorigin="anonymous"
+        ></script>
         <title>MY-NBA</title>
         <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
@@ -10,10 +14,14 @@
             integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
             crossorigin="anonymous"
         />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
+        />
     </head>
     <body>
         <div class="input-group mb-3">
-            <select class="form-select" id="inputGroupSelect04">
+            <select id="team-name" class="form-select" id="inputGroupSelect04">
                 <option selected>TEAM NAME</option>
                 <option value="lakers">lakers</option>
                 <option value="warriors">warriors</option>
@@ -21,24 +29,47 @@
                 <option value="suns">suns</option>
             </select>
             <input
+                id="year"
                 type="number"
                 aria-label="YEAR"
                 class="form-control"
                 placeholder="YEAR"
             />
-            <button class="btn btn-outline-secondary" type="button">
+            <button
+                id="getTeam-btn"
+                class="btn btn-outline-secondary"
+                type="button"
+            >
                 GET TEAM
             </button>
-            <div class="players">
-                <script id="players-template" type="text/x-handlebars-template">
-                    <ul>
-                        {{#each players}}
-                            <li>{{this}}</li>
-                        {{/each}}
-                    </ul>
-                </script>
-                <div class="players-container"></div>
-            </div>
+        </div>
+        <div class="players">
+            <script id="players-template" type="text/x-handlebars-template">
+                <button class="col bi bi-arrow-left-square btn-left"></button>
+                {{#each playersArr}}
+                    <div class="col card" style="width: 18rem;">
+                        <img
+                            src="https://nba-players.herokuapp.com/players/{{this.lastName}}/{{this.firstName}}"
+                            class="card-img-top"
+                            onerror="this.src='./fronted/images/nba.jpg'"
+                            alt="player-picture"
+                        />
+                        <div class="card-body">
+                            <h5
+                                class="player-name card-title"
+                            >{{this.firstName}} {{this.lastName}}</h5>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Postion:
+                                {{this.position}}</li>
+                            <li class="list-group-item">Jersey Number:
+                                {{this.jerseyNumber}}</li>
+                        </ul>
+                    </div>
+                {{/each}}
+                <button class="col bi bi-arrow-right-square btn-right"></button>
+            </script>
+            <div class="players-container row"></div>
         </div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.4/handlebars.js"></script>
         <script
@@ -46,5 +77,11 @@
             integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
             crossorigin="anonymous"
         ></script>
+        <script src="./fronted/build/PlayerInterface.js"></script>
+        <script src="./fronted/build/FetchDetailsFromAPI.js"></script>
+        <script src="./fronted/build/NBADataModel.js"></script>
+        <script src="./fronted/build/RenderModel.js"></script>
+        <script src="./fronted/build/ControllerModel.js"></script>
+        <script src="./fronted/build/main.js"></script>
     </body>
 </html>

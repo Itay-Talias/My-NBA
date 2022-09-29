@@ -8,16 +8,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-class NBADataModel {
-    constructor() {
-        this._playersArr = [];
-    }
-    get playerArr() {
-        return this._playersArr;
-    }
-    FetchPlayerByTeamAndYear(teamName, year) {
+class FetchDetailsFromAPI {
+    static GetPlayersByTeamAndYear(teamName, year) {
         return __awaiter(this, void 0, void 0, function* () {
-            this._playersArr = yield FetchDetailsFromAPI.GetPlayersByTeamAndYear(teamName, year);
+            const playersArr = yield $.get(`./players/${teamName}/${year}`);
+            return playersArr.map((player) => {
+                return {
+                    firstName: player.first_name,
+                    lastName: player.last_name,
+                    teamId: player.team_id,
+                    position: player.position,
+                    jerseyNumber: player.jersey_number,
+                };
+            });
         });
     }
 }
