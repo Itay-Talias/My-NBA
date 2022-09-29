@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "@types/handlebars": "^4.1.0",
+    "@types/jquery": "^3.5.14"
+  },
+  "dependencies": {
+    "handlebars": "^4.7.7"
+  }
+}
