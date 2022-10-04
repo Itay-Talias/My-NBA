@@ -1,4 +1,3 @@
-import imp
 from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
@@ -26,7 +25,13 @@ def get_players(team_name, year):
 
 @app.get('/dream_team')
 def get_dream_team():
-    return dream_team.get_dream_team()
+    # return dream_team.get_dream_team()
+    return [{"first_name": "LeBron",
+            "last_name": "James",
+             "team_id": 1610612747,
+             "position": "F",
+             "jersey_number": 6,
+             "is_active": True}]
 
 
 @app.post('/dream_team')
