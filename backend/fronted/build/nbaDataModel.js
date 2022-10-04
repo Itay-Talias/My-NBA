@@ -11,13 +11,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 class NBADataModel {
     constructor() {
         this._playersArr = [];
+        this._dreamTeamArr = [];
     }
     get playerArr() {
         return this._playersArr;
     }
+    get dreamTeamArr() {
+        return this._dreamTeamArr;
+    }
     FetchPlayerByTeamAndYear(teamName, year) {
         return __awaiter(this, void 0, void 0, function* () {
             this._playersArr = yield FetchDetailsFromAPI.GetPlayersByTeamAndYear(teamName, year);
+        });
+    }
+    FetchDreamTeam() {
+        return __awaiter(this, void 0, void 0, function* () {
+            this._dreamTeamArr = yield FetchDetailsFromAPI.GetDreamTeam();
         });
     }
 }

@@ -17,8 +17,23 @@ class FetchDetailsFromAPI {
                     firstName: player.first_name,
                     lastName: player.last_name,
                     teamId: player.team_id,
-                    position: player.position,
-                    jerseyNumber: player.jersey_number,
+                    pos: player.position,
+                    jersey: player.jersey_number,
+                };
+            });
+        });
+    }
+    static GetDreamTeam() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const DreamTeamArr = yield $.get(`./dream_team`);
+            return DreamTeamArr.map((player) => {
+                return {
+                    firstName: player.first_name,
+                    lastName: player.last_name,
+                    teamId: player.team_id,
+                    pos: player.position,
+                    jersey: player.jersey_number,
+                    isActive: player.is_active,
                 };
             });
         });
