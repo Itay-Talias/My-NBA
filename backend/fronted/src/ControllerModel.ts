@@ -7,6 +7,12 @@ class ControllerModel {
         this.startIndex = 0;
         this.endIndex = 6;
     }
+    public getDreamTeam() {
+        this.dataOfplayerArr.FetchDreamTeam().then(() => {
+            RenderModel.emptyDreamTeam();
+            RenderModel.renderDreamTeam(this.dataOfplayerArr.dreamTeamArr);
+        });
+    }
     public addOnClicksToButtons() {
         $("#getTeam-btn").on("click", () => {
             this.startIndex = 0;
@@ -25,7 +31,6 @@ class ControllerModel {
                     );
                 });
         });
-        console.log("hiii");
         $(".players").on("click", ".btn-left", () => {
             if (this.startIndex !== 0) {
                 this.startIndex--;
