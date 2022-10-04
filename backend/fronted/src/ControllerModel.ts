@@ -5,12 +5,12 @@ class ControllerModel {
     constructor() {
         this.dataOfplayerArr = new NBADataModel();
         this.startIndex = 0;
-        this.endIndex = 3;
+        this.endIndex = 6;
     }
     public addOnClicksToButtons() {
         $("#getTeam-btn").on("click", () => {
             this.startIndex = 0;
-            this.endIndex = 3;
+            this.endIndex = 6;
             this.dataOfplayerArr
                 .FetchPlayerByTeamAndYear(
                     String($("#team-name").val()),
@@ -25,6 +25,7 @@ class ControllerModel {
                     );
                 });
         });
+        console.log("hiii");
         $(".players").on("click", ".btn-left", () => {
             if (this.startIndex !== 0) {
                 this.startIndex--;

@@ -8,7 +8,7 @@ class RenderModel {
     }
     private static renderPlayers(playersArr: Player[]) {
         const userhtml = $("#players-template").html();
-        var template = Handlebars.compile(userhtml);
+        const template = Handlebars.compile(userhtml);
         const newHTML = template({ playersArr: playersArr });
         $(".players-container").append(newHTML);
     }
