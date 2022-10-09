@@ -17,6 +17,12 @@ def root():
     return FileResponse('./fronted/index.html')
 
 
+@app.get('/active_players/{team_name}/{year}')
+def get_players(team_name, year):
+    nba_data.fetch_leagues_by_year(year)
+    return nba_data.get_active_players_arr_by_team_name(team_name)
+
+
 @app.get('/players/{team_name}/{year}')
 def get_players(team_name, year):
     nba_data.fetch_leagues_by_year(year)
@@ -25,72 +31,26 @@ def get_players(team_name, year):
 
 @app.get('/dream_team')
 def get_dream_team():
-    # return dream_team.get_dream_team()
-    return [{"first_name": "LeBron",
-            "last_name": "James",
-             "team_id": 1610612747,
-             "position": "F",
-             "jersey_number": 6,
-             "is_active": True}, {"first_name": "LeBron",
-            "last_name": "James",
-                                  "team_id": 1610612747,
-                                  "position": "F",
-                                  "jersey_number": 6,
-                                  "is_active": True}, {"first_name": "LeBron",
-            "last_name": "James",
-                                                       "team_id": 1610612747,
-                                                       "position": "F",
-                                                       "jersey_number": 6,
-                                                       "is_active": True}, {"first_name": "LeBron",
-            "last_name": "James",
-                                                                            "team_id": 1610612747,
-                                                                            "position": "F",
-                                                                            "jersey_number": 6,
-                                                                            "is_active": True}, {"first_name": "LeBron",
-            "last_name": "James",
-                                                                                                 "team_id": 1610612747,
-                                                                                                 "position": "F",
-                                                                                                 "jersey_number": 6,
-                                                                                                 "is_active": True}, {"first_name": "LeBron",
-            "last_name": "James",
-                                                                                                                      "team_id": 1610612747,
-                                                                                                                      "position": "F",
-                                                                                                                      "jersey_number": 6,
-                                                                                                                      "is_active": True}, {"first_name": "LeBron",
-            "last_name": "James",
-                                                                                                                                           "team_id": 1610612747,
-                                                                                                                                           "position": "F",
-                                                                                                                                           "jersey_number": 6,
-                                                                                                                                           "is_active": True}, {"first_name": "LeBron",
-            "last_name": "James",
-                                                                                                                                                                "team_id": 1610612747,
-                                                                                                                                                                "position": "F",
-                                                                                                                                                                "jersey_number": 6,
-                                                                                                                                                                "is_active": True}, {"first_name": "LeBron",
-            "last_name": "James",
-                                                                                                                                                                                     "team_id": 1610612747,
-                                                                                                                                                                                     "position": "F",
-                                                                                                                                                                                     "jersey_number": 6,
-                                                                                                                                                                                     "is_active": True}, {"first_name": "LeBron",
-            "last_name": "James",
-                                                                                                                                                                                                          "team_id": 1610612747,
-                                                                                                                                                                                                          "position": "F",
-                                                                                                                                                                                                          "jersey_number": 6,
-                                                                                                                                                                                                          "is_active": True}]
+    return dream_team.get_dream_team()
 
 
 @app.post('/dream_team')
 async def add_player_to_dream_team(request: Request):
-    res = await request.json()
-    dream_team.add_player_to_dream_team(res)
+    req = await request.json()
+    dream_team.add_player_to_dream_team(req)
+    return dream_team.get_dream_team()
 
 # @app.put('/dream_team')
 # def update_player_in_dream_team():
 
 
-# @app.delete('/dream_team')
-# def delete_player_from_dream_team():
+@app.delete('/dream_team')
+async def delete_player_from_dream_team(request: Request):
+    req = await request.json()
+    dream_team.delete_player_from_dream_team(
+        req["first_name"], req["last_name"])
+    return dream_team.get_dream_team()
 
 
 if __name__ == "__main__":
-    uvicorn.run("server:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("server:app", host="0.0.0.0", port=5000, reload=True)
