@@ -35,6 +35,10 @@
                 class="form-control"
                 placeholder="YEAR"
             />
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox1">
+                <label class="form-check-label" for="inlineCheckbox1">Actives players</label>
+              </div>
             <button
                 id="getTeam-btn"
                 class="btn btn-outline-secondary"
@@ -43,13 +47,14 @@
                 GET TEAM
             </button>
         </div>
+
         <div class="players">
             <script id="players-template" type="text/x-handlebars-template">
                 <button
                     class="btn btn-secondary col bi bi-arrow-left-square btn-left"
                 ></button>
                 {{#each playersArr}}
-                    <div class="col card" style="width: 18rem;">
+                    <div class="col card" style="width: 18rem;" data-teamID={{this.teamId}} data-isActive="{{this.teamId}}">
                         <img
                             src="https://nba-players.herokuapp.com/players/{{this.lastName}}/{{this.firstName}}"
                             class="card-img-top"
@@ -58,16 +63,18 @@
                         />
                         <div class="card-body">
                             <h5
-                                class="player-name card-title"
-                            >{{this.firstName}} {{this.lastName}}</h5>
+                                class="player-first-name card-title"
+                            >{{this.firstName}}</h5>
+                            <h5
+                            class="player-last-name card-title"
+                        >{{this.lastName}}</h5>
                         </div>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Postion:
-                                {{this.pos}}</li>
-                            <li class="list-group-item">Jersey Number:
+                            <li class="pos list-group-item">{{this.pos}}</li>
+                            <li class="jersey list-group-item">
                                 {{this.jersey}}</li>
                         </ul>
-                        <button type="button" class="btn btn-secondary">Add to
+                        <button type="button" class="add-player btn btn-secondary">Add to
                             dream team</button>
                     </div>
                 {{/each}}
@@ -80,7 +87,8 @@
             <div class="dreamTeam">
                 <script id="dreamTeam-template" type="text/x-handlebars-template">
                     {{#each dreamTeamArr}}
-                        <div class="col-2 card" style="width: 18rem;">
+                        <div class="col-1 card" style="width: 18rem;">
+                            <button type="button" class="delete-player btn btn-danger"><i class="bi bi-trash"></i></button>
                             <img
                                 src="https://nba-players.herokuapp.com/players/{{this.lastName}}/{{this.firstName}}"
                                 class="card-img-top"
@@ -89,8 +97,11 @@
                             />
                             <div class="card-body">
                                 <h5
-                                    class="player-name card-title"
-                                >{{this.firstName}} {{this.lastName}}</h5>
+                                    class="player-first-name card-title"
+                                >{{this.firstName}}</h5>
+                                <h5
+                                class="player-last-name card-title"
+                            >{{this.lastName}}</h5>
                             </div>
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">Postion:
