@@ -76,11 +76,11 @@
                 ></button>
             </script>
             <div class="players-container row"></div>
-            
+            <h1 class="col">My dream team:</h1>
             <div class="dreamTeam">
                 <script id="dreamTeam-template" type="text/x-handlebars-template">
                     {{#each dreamTeamArr}}
-                        <div class="col card" style="width: 18rem;">
+                        <div class="col-2 card" style="width: 18rem;">
                             <img
                                 src="https://nba-players.herokuapp.com/players/{{this.lastName}}/{{this.firstName}}"
                                 class="card-img-top"
