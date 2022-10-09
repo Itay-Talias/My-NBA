@@ -11,6 +11,16 @@ class NBADataModel {
     public get dreamTeamArr(): Player[] {
         return this._dreamTeamArr;
     }
+    public async FetchActivePlayerByTeamAndYear(
+        teamName: string,
+        year: number
+    ) {
+        this._playersArr =
+            await FetchDetailsFromAPI.GetActivePlayersByTeamAndYear(
+                teamName,
+                year
+            );
+    }
     public async FetchPlayerByTeamAndYear(teamName: string, year: number) {
         this._playersArr = await FetchDetailsFromAPI.GetPlayersByTeamAndYear(
             teamName,
@@ -19,5 +29,20 @@ class NBADataModel {
     }
     public async FetchDreamTeam() {
         this._dreamTeamArr = await FetchDetailsFromAPI.GetDreamTeam();
+    }
+    public async AddPlayerToDreamTeam(player: Player) {
+        this._dreamTeamArr = await FetchDetailsFromAPI.AddPlayerToDreamTeam(
+            player
+        );
+    }
+    public async DeletePlayerFromDreamTeam(
+        firstName: string,
+        lastName: string
+    ) {
+        this._dreamTeamArr =
+            await FetchDetailsFromAPI.DeletePlayerFromDreamTeam(
+                firstName,
+                lastName
+            );
     }
 }

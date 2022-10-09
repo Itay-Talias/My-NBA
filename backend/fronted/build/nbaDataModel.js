@@ -19,6 +19,12 @@ class NBADataModel {
     get dreamTeamArr() {
         return this._dreamTeamArr;
     }
+    FetchActivePlayerByTeamAndYear(teamName, year) {
+        return __awaiter(this, void 0, void 0, function* () {
+            this._playersArr =
+                yield FetchDetailsFromAPI.GetActivePlayersByTeamAndYear(teamName, year);
+        });
+    }
     FetchPlayerByTeamAndYear(teamName, year) {
         return __awaiter(this, void 0, void 0, function* () {
             this._playersArr = yield FetchDetailsFromAPI.GetPlayersByTeamAndYear(teamName, year);
@@ -27,6 +33,17 @@ class NBADataModel {
     FetchDreamTeam() {
         return __awaiter(this, void 0, void 0, function* () {
             this._dreamTeamArr = yield FetchDetailsFromAPI.GetDreamTeam();
+        });
+    }
+    AddPlayerToDreamTeam(player) {
+        return __awaiter(this, void 0, void 0, function* () {
+            this._dreamTeamArr = yield FetchDetailsFromAPI.AddPlayerToDreamTeam(player);
+        });
+    }
+    DeletePlayerFromDreamTeam(firstName, lastName) {
+        return __awaiter(this, void 0, void 0, function* () {
+            this._dreamTeamArr =
+                yield FetchDetailsFromAPI.DeletePlayerFromDreamTeam(firstName, lastName);
         });
     }
 }
