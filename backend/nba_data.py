@@ -25,6 +25,10 @@ class NBA_data:
 
     def get_players_arr_by_team_name(self, team_name):
         players_arr = self.get_players_arr()
-        print(players_arr[0].team_id)
         return list(filter(lambda player: player.team_id ==
-                           teams_id[team_name] and player.is_active==True, players_arr))
+                           teams_id[team_name], players_arr))
+
+    def get_active_players_arr_by_team_name(self, team_name):
+        players_arr = self.get_players_arr()
+        return list(filter(lambda player: player.team_id ==
+                           teams_id[team_name] and player.is_active == True, players_arr))
