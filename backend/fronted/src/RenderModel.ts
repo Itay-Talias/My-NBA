@@ -3,6 +3,10 @@ class RenderModel {
         this.emptyPlayers();
         this.renderPlayers(playersArr);
     }
+    public static RenderBirthday(playersArr: Player[]) {
+        this.emptyPlayers();
+        this.renderPlayers(playersArr);
+    }
     private static emptyPlayers() {
         $(".players-container").empty();
     }
