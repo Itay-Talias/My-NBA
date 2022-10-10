@@ -32,3 +32,7 @@ class NBA_data:
         players_arr = self.get_players_arr()
         return list(filter(lambda player: player.team_id ==
                            teams_id[team_name] and player.is_active == True, players_arr))
+
+    @staticmethod
+    def get_player_stats_by_name(first_name, last_name):
+        return Requests_nba_server.get_player_stats(first_name, last_name)
