@@ -29,6 +29,11 @@ def get_players(team_name, year):
     return nba_data.get_players_arr_by_team_name(team_name)
 
 
+@app.get('/player_stats/{last_name}/{first_name}')
+def get_player_stats_by_full_name(first_name, last_name):
+    return nba_data.get_player_stats_by_name(first_name, last_name)
+
+
 @app.get('/dream_team')
 def get_dream_team():
     return dream_team.get_dream_team()
@@ -53,4 +58,4 @@ async def delete_player_from_dream_team(request: Request):
 
 
 if __name__ == "__main__":
-    uvicorn.run("server:app", host="0.0.0.0", port=5000, reload=True)
+    uvicorn.run("server:app", host="0.0.0.0", port=3000, reload=True)
