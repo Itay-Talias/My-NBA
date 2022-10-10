@@ -20,6 +20,7 @@ class FetchDetailsFromAPI {
                     teamId: player.team_id,
                     pos: player.position,
                     jersey: player.jersey_number,
+                    birth: new Date(player.birth),
                     isActive: player.is_active,
                 };
             });
@@ -36,6 +37,7 @@ class FetchDetailsFromAPI {
                     teamId: player.team_id,
                     pos: player.position,
                     jersey: player.jersey_number,
+                    birth: new Date(player.birth),
                     isActive: player.is_active,
                 };
             });
@@ -51,6 +53,7 @@ class FetchDetailsFromAPI {
                     teamId: player.team_id,
                     pos: player.position,
                     jersey: player.jersey_number,
+                    birth: new Date(player.birth),
                     isActive: player.is_active,
                 };
             });
@@ -72,6 +75,7 @@ class FetchDetailsFromAPI {
                     teamId: player.team_id,
                     pos: player.position,
                     jersey: player.jersey_number,
+                    birth: new Date(player.birth),
                     isActive: player.is_active,
                 };
             });
@@ -96,6 +100,7 @@ class FetchDetailsFromAPI {
                     teamId: player.team_id,
                     pos: player.position,
                     jersey: player.jersey_number,
+                    birth: new Date(player.birth),
                     isActive: player.is_active,
                 };
             });
