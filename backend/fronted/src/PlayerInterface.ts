@@ -4,6 +4,6 @@ interface Player {
     teamId: number;
     pos: string;
     jersey: number;
-    birth: Date;
+    birth: string;
     isActive: boolean;
 }
