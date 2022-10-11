@@ -30,10 +30,9 @@ class NBADataModel {
             this._playersArr = yield FetchDetailsFromAPI.GetPlayersByTeamAndYear(teamName, year);
         });
     }
-    GetPlayersWithBirthDatesArr(today) {
-        return this._playersArr.filter((player) => {
-            return (player.birth.getDate() === today.getDate() &&
-                player.birth.getMonth() === today.getMonth());
+    GetPlayersWithBirthDatesArr() {
+        this._playersArr = this._playersArr.filter((player) => {
+            return player.birth !== "";
         });
     }
     FetchDreamTeam() {

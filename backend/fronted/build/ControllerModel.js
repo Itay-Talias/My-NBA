@@ -34,8 +34,11 @@ class ControllerModel {
         });
         $("#birthday-filter-btn").on("click", () => {
             this.flagBirthday = !this.flagBirthday;
+            this.startIndex = 0;
+            this.endIndex = 6;
             if (this.flagBirthday === true) {
-                RenderModel.RenderBirthday(this.dataOfplayerArr.GetPlayersWithBirthDatesArr(new Date()));
+                this.dataOfplayerArr.GetPlayersWithBirthDatesArr();
+                RenderModel.RenderPage(this.dataOfplayerArr.playerArr.slice(this.startIndex, this.endIndex));
                 $("#birthday-filter-btn").html(`<i class="bi bi-funnel-fill"></i> Unfilter`);
             }
             else {
@@ -51,7 +54,7 @@ class ControllerModel {
                 pos: card.find(".pos").text(),
                 jersey: Number(card.find(".jersey").text()),
                 isActive: Boolean(card.attr("data-isActive")),
-                birth: new Date(card.attr("data-birth") || 0),
+                birth: card.attr("data-birth") || "",
                 teamId: Number(card.attr("data-teamID")),
             };
             self.dataOfplayerArr
@@ -71,15 +74,14 @@ class ControllerModel {
             });
         });
         $(".players").on("click", ".btn-left", () => {
-            if (this.startIndex !== 0 && this.flagBirthday === false) {
+            if (this.startIndex !== 0) {
                 this.startIndex--;
                 this.endIndex--;
                 RenderModel.RenderPage(this.dataOfplayerArr.playerArr.slice(this.startIndex, this.endIndex));
             }
         });
         $(".players").on("click", ".btn-right", () => {
-            if (this.endIndex !== this.dataOfplayerArr.playerArr.length - 1 &&
-                this.flagBirthday === false) {
+            if (this.endIndex !== this.dataOfplayerArr.playerArr.length - 1) {
                 this.startIndex++;
                 this.endIndex++;
                 RenderModel.RenderPage(this.dataOfplayerArr.playerArr.slice(this.startIndex, this.endIndex));

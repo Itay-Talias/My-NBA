@@ -27,12 +27,9 @@ class NBADataModel {
             year
         );
     }
-    public GetPlayersWithBirthDatesArr(today: Date) {
-        return this._playersArr.filter((player: Player) => {
-            return (
-                player.birth.getDate() === today.getDate() &&
-                player.birth.getMonth() === today.getMonth()
-            );
+    public GetPlayersWithBirthDatesArr() {
+        this._playersArr = this._playersArr.filter((player: Player) => {
+            return player.birth !== "";
         });
     }
     public async FetchDreamTeam() {
