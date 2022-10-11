@@ -4,6 +4,7 @@ class ControllerModel {
         this.dataOfplayerArr = new NBADataModel();
         this.startIndex = 0;
         this.endIndex = 6;
+        this.flagBirthday = false;
     }
     getDreamTeam() {
         this.dataOfplayerArr.FetchDreamTeam().then(() => {
@@ -31,6 +32,17 @@ class ControllerModel {
                 });
             }
         });
+        $("#birthday-filter-btn").on("click", () => {
+            this.flagBirthday = !this.flagBirthday;
+            if (this.flagBirthday === true) {
+                RenderModel.RenderBirthday(this.dataOfplayerArr.GetPlayersWithBirthDatesArr(new Date()));
+                $("#birthday-filter-btn").html(`<i class="bi bi-funnel-fill"></i> Unfilter`);
+            }
+            else {
+                RenderModel.RenderPage(this.dataOfplayerArr.playerArr.slice(this.startIndex, this.endIndex));
+                $("#birthday-filter-btn").html(`<i class="bi bi-funnel"></i> Filter by birthday`);
+            }
+        });
         $(".players").on("click", ".add-player", function () {
             const card = $(this).closest(".card");
             const newPlayerToDreamTeam = {
@@ -39,6 +51,7 @@ class ControllerModel {
                 pos: card.find(".pos").text(),
                 jersey: Number(card.find(".jersey").text()),
                 isActive: Boolean(card.attr("data-isActive")),
+                birth: new Date(card.attr("data-birth") || 0),
                 teamId: Number(card.attr("data-teamID")),
             };
             self.dataOfplayerArr
@@ -58,14 +71,15 @@ class ControllerModel {
             });
         });
         $(".players").on("click", ".btn-left", () => {
-            if (this.startIndex !== 0) {
+            if (this.startIndex !== 0 && this.flagBirthday === false) {
                 this.startIndex--;
                 this.endIndex--;
                 RenderModel.RenderPage(this.dataOfplayerArr.playerArr.slice(this.startIndex, this.endIndex));
             }
         });
         $(".players").on("click", ".btn-right", () => {
-            if (this.endIndex !== this.dataOfplayerArr.playerArr.length - 1) {
+            if (this.endIndex !== this.dataOfplayerArr.playerArr.length - 1 &&
+                this.flagBirthday === false) {
                 this.startIndex++;
                 this.endIndex++;
                 RenderModel.RenderPage(this.dataOfplayerArr.playerArr.slice(this.startIndex, this.endIndex));
