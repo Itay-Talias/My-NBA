@@ -60,7 +60,7 @@
                     class="btn btn-secondary col bi bi-arrow-left-square btn-left"
                 ></button>
                 {{#each playersArr}}
-                    <div class="col card" style="width: 18rem;" data-teamID={{this.teamId}} data-isActive="{{this.teamId}}" data-birth={{this.birth}}>
+                    <div class="col card player-card" style="width: 18rem;" data-teamID={{this.teamId}} data-isActive="{{this.teamId}}" data-birth={{this.birth}}>
                         <img
                             src="https://nba-players.herokuapp.com/players/{{this.lastName}}/{{this.firstName}}"
                             class="card-img-top"

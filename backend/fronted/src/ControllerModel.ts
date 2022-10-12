@@ -16,6 +16,7 @@ class ControllerModel {
         this.addOnClickToDeletePlayerButton();
         this.addOnClickToLeftRightButtons();
         this.addOnErrorToPicturePlayer();
+        this.addOnClickCardToStats();
     }
     private addOnClickToLeftRightButtons() {
         $(".players").on("click", ".btn-left", () => {
@@ -112,7 +113,7 @@ class ControllerModel {
     }
     private addOnClickToAddPlayerButton() {
         const self = this;
-        $(".players").on("click", ".add-player", function () {
+        $(".players").on("click", ".add-player", function (event: any) {
             const card = $(this).closest(".card");
             const newPlayerToDreamTeam: Player = {
                 firstName: card.find(".player-first-name").text(),
@@ -130,6 +131,7 @@ class ControllerModel {
                         self.dataOfplayerArr.dreamTeamArr
                     );
                 });
+            event.stopPropagation();
         });
     }
     private addOnClickToDeletePlayerButton() {
@@ -155,6 +157,14 @@ class ControllerModel {
                 "https://he.wikipedia.org/wiki/NBA#/media/%D7%A7%D7%95%D7%91%D7%A5:NBALogo.svg"
             );
             $(".card-img-top").attr("onerror", null);
+        });
+    }
+    private addOnClickCardToStats() {
+        $(".players").on("click", ".player-card", function () {
+            const card = $(this).closest(".card");
+            const firstName = card.find(".player-first-name").text();
+            const lastName = card.find(".player-last-name").text();
+            console.log(firstName, lastName);
         });
     }
 }

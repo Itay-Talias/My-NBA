@@ -13,6 +13,7 @@ class ControllerModel {
         this.addOnClickToDeletePlayerButton();
         this.addOnClickToLeftRightButtons();
         this.addOnErrorToPicturePlayer();
+        this.addOnClickCardToStats();
     }
     addOnClickToLeftRightButtons() {
         $(".players").on("click", ".btn-left", () => {
@@ -72,7 +73,7 @@ class ControllerModel {
     }
     addOnClickToAddPlayerButton() {
         const self = this;
-        $(".players").on("click", ".add-player", function () {
+        $(".players").on("click", ".add-player", function (event) {
             const card = $(this).closest(".card");
             const newPlayerToDreamTeam = {
                 firstName: card.find(".player-first-name").text(),
@@ -88,6 +89,7 @@ class ControllerModel {
                 .then(() => {
                 RenderModel.RenderDreamTeam(self.dataOfplayerArr.dreamTeamArr);
             });
+            event.stopPropagation();
         });
     }
     addOnClickToDeletePlayerButton() {
@@ -105,6 +107,14 @@ class ControllerModel {
         $(".card-img-top").on("error", function (event) {
             $(".card-img-top").attr("src", "https://he.wikipedia.org/wiki/NBA#/media/%D7%A7%D7%95%D7%91%D7%A5:NBALogo.svg");
             $(".card-img-top").attr("onerror", null);
+        });
+    }
+    addOnClickCardToStats() {
+        $(".players").on("click", ".player-card", function () {
+            const card = $(this).closest(".card");
+            const firstName = card.find(".player-first-name").text();
+            const lastName = card.find(".player-last-name").text();
+            console.log(firstName, lastName);
         });
     }
 }
