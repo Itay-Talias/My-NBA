@@ -1,7 +1,6 @@
 const NBAController = new ControllerModel();
 
 NBAController.addOnClicksToButtons();
-NBAController.getDreamTeam();
 
 $(".card-img-top").on("error", function (event) {
     $(".card-img-top").attr(

@@ -42,7 +42,11 @@ class ControllerModel {
                 $("#birthday-filter-btn").html(`<i class="bi bi-funnel-fill"></i> Unfilter`);
             }
             else {
-                RenderModel.RenderPage(this.dataOfplayerArr.playerArr.slice(this.startIndex, this.endIndex));
+                this.dataOfplayerArr
+                    .FetchActivePlayerByTeamAndYear(String($("#team-name").val()), Number($("#year").val()))
+                    .then(() => {
+                    RenderModel.RenderPage(this.dataOfplayerArr.playerArr.slice(this.startIndex, this.endIndex));
+                });
                 $("#birthday-filter-btn").html(`<i class="bi bi-funnel"></i> Filter by birthday`);
             }
         });
