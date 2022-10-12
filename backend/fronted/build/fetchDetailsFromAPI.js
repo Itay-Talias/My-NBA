@@ -9,54 +9,35 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 class FetchDetailsFromAPI {
+    static parsingDateToPlayer(playersArr) {
+        return playersArr.map((player) => {
+            return {
+                firstName: player.first_name,
+                lastName: player.last_name,
+                teamId: player.team_id,
+                pos: player.position,
+                jersey: player.jersey_number,
+                birth: player.birth,
+                isActive: player.is_active,
+            };
+        });
+    }
     static GetActivePlayersByTeamAndYear(teamName, year) {
         return __awaiter(this, void 0, void 0, function* () {
             const playersArr = yield $.get(`./active_players/${teamName}/${year}`);
-            console.log(playersArr.length);
-            return playersArr.map((player) => {
-                return {
-                    firstName: player.first_name,
-                    lastName: player.last_name,
-                    teamId: player.team_id,
-                    pos: player.position,
-                    jersey: player.jersey_number,
-                    birth: player.birth,
-                    isActive: player.is_active,
-                };
-            });
+            return this.parsingDateToPlayer(playersArr);
         });
     }
     static GetPlayersByTeamAndYear(teamName, year) {
         return __awaiter(this, void 0, void 0, function* () {
             const playersArr = yield $.get(`./players/${teamName}/${year}`);
-            console.log(playersArr.length);
-            return playersArr.map((player) => {
-                return {
-                    firstName: player.first_name,
-                    lastName: player.last_name,
-                    teamId: player.team_id,
-                    pos: player.position,
-                    jersey: player.jersey_number,
-                    birth: player.birth,
-                    isActive: player.is_active,
-                };
-            });
+            return this.parsingDateToPlayer(playersArr);
         });
     }
     static GetDreamTeam() {
         return __awaiter(this, void 0, void 0, function* () {
             const DreamTeamArr = yield $.get(`./dream_team`);
-            return DreamTeamArr.map((player) => {
-                return {
-                    firstName: player.first_name,
-                    lastName: player.last_name,
-                    teamId: player.team_id,
-                    pos: player.position,
-                    jersey: player.jersey_number,
-                    birth: player.birth,
-                    isActive: player.is_active,
-                };
-            });
+            return this.parsingDateToPlayer(DreamTeamArr);
         });
     }
     static AddPlayerToDreamTeam(player) {
@@ -68,17 +49,7 @@ class FetchDetailsFromAPI {
                 contentType: "application/json",
                 dataType: "json",
             });
-            return DreamTeamArr.map((player) => {
-                return {
-                    firstName: player.first_name,
-                    lastName: player.last_name,
-                    teamId: player.team_id,
-                    pos: player.position,
-                    jersey: player.jersey_number,
-                    birth: player.birth,
-                    isActive: player.is_active,
-                };
-            });
+            return this.parsingDateToPlayer(DreamTeamArr);
         });
     }
     static DeletePlayerFromDreamTeam(firstName, lastName) {
@@ -93,17 +64,7 @@ class FetchDetailsFromAPI {
                 contentType: "application/json",
                 dataType: "json",
             });
-            return res.map((player) => {
-                return {
-                    firstName: player.first_name,
-                    lastName: player.last_name,
-                    teamId: player.team_id,
-                    pos: player.position,
-                    jersey: player.jersey_number,
-                    birth: player.birth,
-                    isActive: player.is_active,
-                };
-            });
+            return this.parsingDateToPlayer(res);
         });
     }
 }

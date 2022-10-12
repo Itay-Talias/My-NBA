@@ -6,14 +6,31 @@ class ControllerModel {
         this.endIndex = 6;
         this.flagBirthday = false;
     }
-    getDreamTeam() {
-        this.dataOfplayerArr.FetchDreamTeam().then(() => {
-            RenderModel.emptyDreamTeam();
-            RenderModel.renderDreamTeam(this.dataOfplayerArr.dreamTeamArr);
+    AddListenersToHTML() {
+        this.addOnClickToGetPlayers();
+        this.addOnClickToFilterButton();
+        this.addOnClickToAddPlayerButton();
+        this.addOnClickToDeletePlayerButton();
+        this.addOnClickToLeftRightButtons();
+        this.addOnErrorToPicturePlayer();
+    }
+    addOnClickToLeftRightButtons() {
+        $(".players").on("click", ".btn-left", () => {
+            if (this.startIndex !== 0) {
+                this.startIndex--;
+                this.endIndex--;
+                RenderModel.RenderPlayers(this.dataOfplayerArr.playerArr.slice(this.startIndex, this.endIndex));
+            }
+        });
+        $(".players").on("click", ".btn-right", () => {
+            if (this.endIndex !== this.dataOfplayerArr.playerArr.length - 1) {
+                this.startIndex++;
+                this.endIndex++;
+                RenderModel.RenderPlayers(this.dataOfplayerArr.playerArr.slice(this.startIndex, this.endIndex));
+            }
         });
     }
-    addOnClicksToButtons() {
-        const self = this;
+    addOnClickToGetPlayers() {
         $("#getTeam-btn").on("click", () => {
             this.startIndex = 0;
             this.endIndex = 6;
@@ -21,35 +38,40 @@ class ControllerModel {
                 this.dataOfplayerArr
                     .FetchActivePlayerByTeamAndYear(String($("#team-name").val()), Number($("#year").val()))
                     .then(() => {
-                    RenderModel.RenderPage(this.dataOfplayerArr.playerArr.slice(this.startIndex, this.endIndex));
+                    RenderModel.RenderPlayers(this.dataOfplayerArr.playerArr.slice(this.startIndex, this.endIndex));
                 });
             }
             else {
                 this.dataOfplayerArr
                     .FetchPlayerByTeamAndYear(String($("#team-name").val()), Number($("#year").val()))
                     .then(() => {
-                    RenderModel.RenderPage(this.dataOfplayerArr.playerArr.slice(this.startIndex, this.endIndex));
+                    RenderModel.RenderPlayers(this.dataOfplayerArr.playerArr.slice(this.startIndex, this.endIndex));
                 });
             }
         });
+    }
+    addOnClickToFilterButton() {
         $("#birthday-filter-btn").on("click", () => {
             this.flagBirthday = !this.flagBirthday;
             this.startIndex = 0;
             this.endIndex = 6;
             if (this.flagBirthday === true) {
                 this.dataOfplayerArr.GetPlayersWithBirthDatesArr();
-                RenderModel.RenderPage(this.dataOfplayerArr.playerArr.slice(this.startIndex, this.endIndex));
-                $("#birthday-filter-btn").html(`<i class="bi bi-funnel-fill"></i> Unfilter`);
+                RenderModel.RenderPlayers(this.dataOfplayerArr.playerArr.slice(this.startIndex, this.endIndex));
+                RenderModel.RenderUnfilterButton();
             }
             else {
                 this.dataOfplayerArr
                     .FetchActivePlayerByTeamAndYear(String($("#team-name").val()), Number($("#year").val()))
                     .then(() => {
-                    RenderModel.RenderPage(this.dataOfplayerArr.playerArr.slice(this.startIndex, this.endIndex));
+                    RenderModel.RenderPlayers(this.dataOfplayerArr.playerArr.slice(this.startIndex, this.endIndex));
                 });
-                $("#birthday-filter-btn").html(`<i class="bi bi-funnel"></i> Filter by birthday`);
+                RenderModel.RenderFilterButton();
             }
         });
+    }
+    addOnClickToAddPlayerButton() {
+        const self = this;
         $(".players").on("click", ".add-player", function () {
             const card = $(this).closest(".card");
             const newPlayerToDreamTeam = {
@@ -64,32 +86,25 @@ class ControllerModel {
             self.dataOfplayerArr
                 .AddPlayerToDreamTeam(newPlayerToDreamTeam)
                 .then(() => {
-                RenderModel.emptyDreamTeam();
-                RenderModel.renderDreamTeam(self.dataOfplayerArr.dreamTeamArr);
+                RenderModel.RenderDreamTeam(self.dataOfplayerArr.dreamTeamArr);
             });
         });
+    }
+    addOnClickToDeletePlayerButton() {
+        const self = this;
         $(".players").on("click", ".delete-player", function () {
             const card = $(this).closest(".card");
             self.dataOfplayerArr
                 .DeletePlayerFromDreamTeam(card.find(".player-first-name").text(), card.find(".player-last-name").text())
                 .then(() => {
-                RenderModel.emptyDreamTeam();
-                RenderModel.renderDreamTeam(self.dataOfplayerArr.dreamTeamArr);
+                RenderModel.RenderDreamTeam(self.dataOfplayerArr.dreamTeamArr);
             });
         });
-        $(".players").on("click", ".btn-left", () => {
-            if (this.startIndex !== 0) {
-                this.startIndex--;
-                this.endIndex--;
-                RenderModel.RenderPage(this.dataOfplayerArr.playerArr.slice(this.startIndex, this.endIndex));
-            }
-        });
-        $(".players").on("click", ".btn-right", () => {
-            if (this.endIndex !== this.dataOfplayerArr.playerArr.length - 1) {
-                this.startIndex++;
-                this.endIndex++;
-                RenderModel.RenderPage(this.dataOfplayerArr.playerArr.slice(this.startIndex, this.endIndex));
-            }
+    }
+    addOnErrorToPicturePlayer() {
+        $(".card-img-top").on("error", function (event) {
+            $(".card-img-top").attr("src", "https://he.wikipedia.org/wiki/NBA#/media/%D7%A7%D7%95%D7%91%D7%A5:NBALogo.svg");
+            $(".card-img-top").attr("onerror", null);
         });
     }
 }

@@ -9,14 +9,41 @@ class ControllerModel {
         this.endIndex = 6;
         this.flagBirthday = false;
     }
-    public getDreamTeam() {
-        this.dataOfplayerArr.FetchDreamTeam().then(() => {
-            RenderModel.emptyDreamTeam();
-            RenderModel.renderDreamTeam(this.dataOfplayerArr.dreamTeamArr);
+    public AddListenersToHTML() {
+        this.addOnClickToGetPlayers();
+        this.addOnClickToFilterButton();
+        this.addOnClickToAddPlayerButton();
+        this.addOnClickToDeletePlayerButton();
+        this.addOnClickToLeftRightButtons();
+        this.addOnErrorToPicturePlayer();
+    }
+    private addOnClickToLeftRightButtons() {
+        $(".players").on("click", ".btn-left", () => {
+            if (this.startIndex !== 0) {
+                this.startIndex--;
+                this.endIndex--;
+                RenderModel.RenderPlayers(
+                    this.dataOfplayerArr.playerArr.slice(
+                        this.startIndex,
+                        this.endIndex
+                    )
+                );
+            }
+        });
+        $(".players").on("click", ".btn-right", () => {
+            if (this.endIndex !== this.dataOfplayerArr.playerArr.length - 1) {
+                this.startIndex++;
+                this.endIndex++;
+                RenderModel.RenderPlayers(
+                    this.dataOfplayerArr.playerArr.slice(
+                        this.startIndex,
+                        this.endIndex
+                    )
+                );
+            }
         });
     }
-    public addOnClicksToButtons() {
-        const self = this;
+    private addOnClickToGetPlayers() {
         $("#getTeam-btn").on("click", () => {
             this.startIndex = 0;
             this.endIndex = 6;
@@ -27,7 +54,7 @@ class ControllerModel {
                         Number($("#year").val())
                     )
                     .then(() => {
-                        RenderModel.RenderPage(
+                        RenderModel.RenderPlayers(
                             this.dataOfplayerArr.playerArr.slice(
                                 this.startIndex,
                                 this.endIndex
@@ -41,7 +68,7 @@ class ControllerModel {
                         Number($("#year").val())
                     )
                     .then(() => {
-                        RenderModel.RenderPage(
+                        RenderModel.RenderPlayers(
                             this.dataOfplayerArr.playerArr.slice(
                                 this.startIndex,
                                 this.endIndex
@@ -50,21 +77,21 @@ class ControllerModel {
                     });
             }
         });
+    }
+    private addOnClickToFilterButton() {
         $("#birthday-filter-btn").on("click", () => {
             this.flagBirthday = !this.flagBirthday;
             this.startIndex = 0;
             this.endIndex = 6;
             if (this.flagBirthday === true) {
                 this.dataOfplayerArr.GetPlayersWithBirthDatesArr();
-                RenderModel.RenderPage(
+                RenderModel.RenderPlayers(
                     this.dataOfplayerArr.playerArr.slice(
                         this.startIndex,
                         this.endIndex
                     )
                 );
-                $("#birthday-filter-btn").html(
-                    `<i class="bi bi-funnel-fill"></i> Unfilter`
-                );
+                RenderModel.RenderUnfilterButton();
             } else {
                 this.dataOfplayerArr
                     .FetchActivePlayerByTeamAndYear(
@@ -72,19 +99,19 @@ class ControllerModel {
                         Number($("#year").val())
                     )
                     .then(() => {
-                        RenderModel.RenderPage(
+                        RenderModel.RenderPlayers(
                             this.dataOfplayerArr.playerArr.slice(
                                 this.startIndex,
                                 this.endIndex
                             )
                         );
                     });
-
-                $("#birthday-filter-btn").html(
-                    `<i class="bi bi-funnel"></i> Filter by birthday`
-                );
+                RenderModel.RenderFilterButton();
             }
         });
+    }
+    private addOnClickToAddPlayerButton() {
+        const self = this;
         $(".players").on("click", ".add-player", function () {
             const card = $(this).closest(".card");
             const newPlayerToDreamTeam: Player = {
@@ -99,12 +126,14 @@ class ControllerModel {
             self.dataOfplayerArr
                 .AddPlayerToDreamTeam(newPlayerToDreamTeam)
                 .then(() => {
-                    RenderModel.emptyDreamTeam();
-                    RenderModel.renderDreamTeam(
+                    RenderModel.RenderDreamTeam(
                         self.dataOfplayerArr.dreamTeamArr
                     );
                 });
         });
+    }
+    private addOnClickToDeletePlayerButton() {
+        const self = this;
         $(".players").on("click", ".delete-player", function () {
             const card = $(this).closest(".card");
             self.dataOfplayerArr
@@ -113,36 +142,19 @@ class ControllerModel {
                     card.find(".player-last-name").text()
                 )
                 .then(() => {
-                    RenderModel.emptyDreamTeam();
-                    RenderModel.renderDreamTeam(
+                    RenderModel.RenderDreamTeam(
                         self.dataOfplayerArr.dreamTeamArr
                     );
                 });
         });
-
-        $(".players").on("click", ".btn-left", () => {
-            if (this.startIndex !== 0) {
-                this.startIndex--;
-                this.endIndex--;
-                RenderModel.RenderPage(
-                    this.dataOfplayerArr.playerArr.slice(
-                        this.startIndex,
-                        this.endIndex
-                    )
-                );
-            }
-        });
-        $(".players").on("click", ".btn-right", () => {
-            if (this.endIndex !== this.dataOfplayerArr.playerArr.length - 1) {
-                this.startIndex++;
-                this.endIndex++;
-                RenderModel.RenderPage(
-                    this.dataOfplayerArr.playerArr.slice(
-                        this.startIndex,
-                        this.endIndex
-                    )
-                );
-            }
+    }
+    private addOnErrorToPicturePlayer() {
+        $(".card-img-top").on("error", function (event) {
+            $(".card-img-top").attr(
+                "src",
+                "https://he.wikipedia.org/wiki/NBA#/media/%D7%A7%D7%95%D7%91%D7%A5:NBALogo.svg"
+            );
+            $(".card-img-top").attr("onerror", null);
         });
     }
 }
