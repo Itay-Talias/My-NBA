@@ -9,12 +9,12 @@ app = FastAPI()
 nba_data = NBA_data()
 dream_team = Dream_team()
 
-app.mount("/fronted", StaticFiles(directory="fronted"), name="fronted")
+app.mount("/FRONT", StaticFiles(directory="FRONT"), name="FRONT")
 
 
 @app.get('/')
 def root():
-    return FileResponse('./fronted/index.html')
+    return FileResponse('./FRONT/index.html')
 
 
 @app.get('/active_players/{team_name}/{year}')
