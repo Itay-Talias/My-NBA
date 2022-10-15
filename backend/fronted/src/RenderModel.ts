@@ -1,11 +1,14 @@
 class RenderModel {
     public static RenderPlayers(playersArr: Player[]) {
-        this.emptyPlayers();
-        this.renderPlayers(playersArr);
+        this.emptyContainer("players");
+        this.renderContainer({ playersArr: playersArr }, "players");
     }
     public static RenderDreamTeam(playersArr: Player[]) {
-        this.emptyDreamTeam();
-        this.renderDreamTeam(playersArr);
+        this.emptyContainer("dreamTeam");
+        this.renderContainer({ dreamTeamArr: playersArr }, "dreamTeam");
+    }
+    public static RenderPlayerStats(playersStats: object) {
+        this.renderContainer(playersStats, "player-stats");
     }
     public static RenderFilterButton() {
         $("#birthday-filter-btn").html(
@@ -17,22 +20,19 @@ class RenderModel {
             `<i class="bi bi-funnel-fill"></i> Unfilter`
         );
     }
-    private static emptyPlayers() {
-        $(".players-container").empty();
+    public static EmptyPlayerStats() {
+        this.emptyContainer(".player-stats");
     }
-    private static renderPlayers(playersArr: Player[]) {
-        const userhtml = $("#players-template").html();
+    private static renderContainer(
+        objectToRender: object,
+        containerName: string
+    ) {
+        const userhtml = $(`#${containerName}-template`).html();
         const template = Handlebars.compile(userhtml);
-        const newHTML = template({ playersArr: playersArr });
-        $(".players-container").append(newHTML);
+        const newHTML = template(objectToRender);
+        $(`.${containerName}-container`).append(newHTML);
     }
-    private static renderDreamTeam(dreamTeamArr: Player[]) {
-        const userhtml = $("#dreamTeam-template").html();
-        const template = Handlebars.compile(userhtml);
-        const newHTML = template({ dreamTeamArr: dreamTeamArr });
-        $(".dreamTeam-container").append(newHTML);
-    }
-    private static emptyDreamTeam() {
-        $(".dreamTeam-container").empty();
+    private static emptyContainer(containerName: string) {
+        $(`.${containerName}-container`).empty();
     }
 }
