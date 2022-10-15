@@ -18,7 +18,11 @@ Front : 1. TypeScript
 Server: 1. Python
 
 ## Screenshots
-![image](https://user-images.githubusercontent.com/88106495/195982360-0ee62450-194e-46e8-9d48-fc17de4f1d05.png)
-![image](https://user-images.githubusercontent.com/88106495/195982369-dcc957c0-d493-4962-8b11-fbf29894e891.png)
-![image](https://user-images.githubusercontent.com/88106495/195982388-cb629454-79c2-40c6-94b9-2a2d8bfd5533.png)
-![image](https://user-images.githubusercontent.com/88106495/195982400-4a03c68d-2c72-4b75-a7c8-96c12e331965.png)
+### Initial page
+![image](https://user-images.githubusercontent.com/88106495/195982573-9390354b-558d-4715-8c6b-6965a32797ca.png)
+### Page after "GET TEAM" clicked
+![image](https://user-images.githubusercontent.com/88106495/195982588-57f8c723-9954-48d8-bb68-e3c52b33c766.png)
+### Page after clicking on the player card (shows the statistics)
+![image](https://user-images.githubusercontent.com/88106495/195982622-6b5494f8-ca35-4a74-a123-4192ee909d40.png)
+### Page after "Add to DreamTeam" clicked
+![image](https://user-images.githubusercontent.com/88106495/195982643-df19e1f7-2f42-4455-9c4e-f7da4139940f.png)
