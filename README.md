@@ -11,11 +11,11 @@ MY-NBA - An application that displays an NBA team by team and year that a user e
 - Click on player card shows his statistic
 
 ## Technologies
-Front : 1. TypeScript
-        2. HTML
-        3. CSS
-        
-Server: 1. Python
+![HTML Icon](https://i.ibb.co/9tyHGr7/html-logo.png, "HTML")
+![CSS Icon](https://i.ibb.co/b3QNSgX/css-logo.png, "CSS")
+![TypeScript Icon](https://img.icons8.com/color/344/typescript.png), "TypeScript")
+![Python Icon](https://img.icons8.com/color/344/python--v1.png), "Python")
+
 
 ## Screenshots
 ### Initial page
