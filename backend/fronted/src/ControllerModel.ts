@@ -17,6 +17,7 @@ class ControllerModel {
         this.addOnClickToLeftRightButtons();
         this.addOnErrorToPicturePlayer();
         this.addOnClickCardToStats();
+        this.addRemoveStatsLisener();
     }
     private addOnClickToLeftRightButtons() {
         $(".players").on("click", ".btn-left", () => {
@@ -160,11 +161,22 @@ class ControllerModel {
         });
     }
     private addOnClickCardToStats() {
+        const self = this;
         $(".players").on("click", ".player-card", function () {
             const card = $(this).closest(".card");
             const firstName = card.find(".player-first-name").text();
             const lastName = card.find(".player-last-name").text();
-            console.log(firstName, lastName);
+            NBADataModel.GetPlayerStatsByFullName(firstName, lastName).then(
+                (playerStats) => {
+                    console.log(playerStats);
+                    RenderModel.RenderPlayerStats(playerStats);
+                }
+            );
+        });
+    }
+    private addRemoveStatsLisener() {
+        $(".players").on("mouseleave", ".player-card", function () {
+            RenderModel.EmptyPlayerStats();
         });
     }
 }

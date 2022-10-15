@@ -50,4 +50,14 @@ class NBADataModel {
                 lastName
             );
     }
+    public static async GetPlayerStatsByFullName(
+        firstName: string,
+        lastName: string
+    ): Promise<object> {
+        const statsPlayer = await FetchDetailsFromAPI.GetStatsByFullName(
+            firstName,
+            lastName
+        );
+        return statsPlayer;
+    }
 }

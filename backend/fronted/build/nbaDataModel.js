@@ -51,4 +51,10 @@ class NBADataModel {
                 yield FetchDetailsFromAPI.DeletePlayerFromDreamTeam(firstName, lastName);
         });
     }
+    static GetPlayerStatsByFullName(firstName, lastName) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const statsPlayer = yield FetchDetailsFromAPI.GetStatsByFullName(firstName, lastName);
+            return statsPlayer;
+        });
+    }
 }

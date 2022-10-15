@@ -89,7 +89,18 @@
                 ></button>
             </script>
             <div class="players-container row"></div>
-            <h1 class="col">My dream team:</h1>
+            <script id="player-stats-template" type="text/x-handlebars-template">
+                <h2 class="player-stats-title">Player statistics:</h2>
+                <ul class="list-group">
+                    <li class="list-group-item">Assists per game: {{assists_per_game}}</li>
+                    <li class="list-group-item">Blocks per game: {{blocks_per_game}}</li>
+                    <li class="list-group-item">Games player: {{games_played}}</li>
+                    <li class="list-group-item">Minutes per game: {{minutes_per_game}}</li>
+                    <li class="list-group-item">Points per game: {{points_per_game}}</li>
+                </ul>
+            </script>
+            <div class="player-stats-container row"></div>
+            <h1 class="row">My dream team:</h1>
             <div class="dreamTeam">
                 <script id="dreamTeam-template" type="text/x-handlebars-template">
                     {{#each dreamTeamArr}}

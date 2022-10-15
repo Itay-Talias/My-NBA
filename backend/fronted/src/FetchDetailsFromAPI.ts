@@ -1,5 +1,5 @@
 class FetchDetailsFromAPI {
-    private static parsingDateToPlayer(playersArr: any[]): Player[] {
+    private static parsingJSONToPlayer(playersArr: any[]): Player[] {
         return playersArr.map((player: any) => {
             return {
                 firstName: player.first_name,
@@ -17,18 +17,18 @@ class FetchDetailsFromAPI {
         year: number
     ): Promise<Player[]> {
         const playersArr = await $.get(`./active_players/${teamName}/${year}`);
-        return this.parsingDateToPlayer(playersArr);
+        return this.parsingJSONToPlayer(playersArr);
     }
     public static async GetPlayersByTeamAndYear(
         teamName: string,
         year: number
     ): Promise<Player[]> {
         const playersArr = await $.get(`./players/${teamName}/${year}`);
-        return this.parsingDateToPlayer(playersArr);
+        return this.parsingJSONToPlayer(playersArr);
     }
     public static async GetDreamTeam(): Promise<Player[]> {
         const DreamTeamArr = await $.get(`./dream_team`);
-        return this.parsingDateToPlayer(DreamTeamArr);
+        return this.parsingJSONToPlayer(DreamTeamArr);
     }
     public static async AddPlayerToDreamTeam(player: Player) {
         const DreamTeamArr = await $.ajax({
@@ -38,7 +38,7 @@ class FetchDetailsFromAPI {
             contentType: "application/json",
             dataType: "json",
         });
-        return this.parsingDateToPlayer(DreamTeamArr);
+        return this.parsingJSONToPlayer(DreamTeamArr);
     }
     public static async DeletePlayerFromDreamTeam(
         firstName: string,
@@ -54,6 +54,15 @@ class FetchDetailsFromAPI {
             contentType: "application/json",
             dataType: "json",
         });
-        return this.parsingDateToPlayer(res);
+        return this.parsingJSONToPlayer(res);
+    }
+    public static async GetStatsByFullName(
+        firstName: string,
+        lastName: string
+    ): Promise<object> {
+        const statsPlayer = await $.get(
+            `./player_stats/${lastName}/${firstName}`
+        );
+        return statsPlayer;
     }
 }

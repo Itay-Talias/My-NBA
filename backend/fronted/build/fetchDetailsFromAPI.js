@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 class FetchDetailsFromAPI {
-    static parsingDateToPlayer(playersArr) {
+    static parsingJSONToPlayer(playersArr) {
         return playersArr.map((player) => {
             return {
                 firstName: player.first_name,
@@ -25,19 +25,19 @@ class FetchDetailsFromAPI {
     static GetActivePlayersByTeamAndYear(teamName, year) {
         return __awaiter(this, void 0, void 0, function* () {
             const playersArr = yield $.get(`./active_players/${teamName}/${year}`);
-            return this.parsingDateToPlayer(playersArr);
+            return this.parsingJSONToPlayer(playersArr);
         });
     }
     static GetPlayersByTeamAndYear(teamName, year) {
         return __awaiter(this, void 0, void 0, function* () {
             const playersArr = yield $.get(`./players/${teamName}/${year}`);
-            return this.parsingDateToPlayer(playersArr);
+            return this.parsingJSONToPlayer(playersArr);
         });
     }
     static GetDreamTeam() {
         return __awaiter(this, void 0, void 0, function* () {
             const DreamTeamArr = yield $.get(`./dream_team`);
-            return this.parsingDateToPlayer(DreamTeamArr);
+            return this.parsingJSONToPlayer(DreamTeamArr);
         });
     }
     static AddPlayerToDreamTeam(player) {
@@ -49,7 +49,7 @@ class FetchDetailsFromAPI {
                 contentType: "application/json",
                 dataType: "json",
             });
-            return this.parsingDateToPlayer(DreamTeamArr);
+            return this.parsingJSONToPlayer(DreamTeamArr);
         });
     }
     static DeletePlayerFromDreamTeam(firstName, lastName) {
@@ -64,7 +64,13 @@ class FetchDetailsFromAPI {
                 contentType: "application/json",
                 dataType: "json",
             });
-            return this.parsingDateToPlayer(res);
+            return this.parsingJSONToPlayer(res);
+        });
+    }
+    static GetStatsByFullName(firstName, lastName) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const statsPlayer = yield $.get(`./player_stats/${lastName}/${firstName}`);
+            return statsPlayer;
         });
     }
 }
