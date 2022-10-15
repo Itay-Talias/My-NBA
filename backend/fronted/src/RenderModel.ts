@@ -21,7 +21,7 @@ class RenderModel {
         );
     }
     public static EmptyPlayerStats() {
-        this.emptyContainer(".player-stats");
+        this.emptyContainer("player-stats");
     }
     private static renderContainer(
         objectToRender: object,

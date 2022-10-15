@@ -18,7 +18,7 @@ class RenderModel {
         $("#birthday-filter-btn").html(`<i class="bi bi-funnel-fill"></i> Unfilter`);
     }
     static EmptyPlayerStats() {
-        this.emptyContainer(".player-stats");
+        this.emptyContainer("player-stats");
     }
     static renderContainer(objectToRender, containerName) {
         const userhtml = $(`#${containerName}-template`).html();

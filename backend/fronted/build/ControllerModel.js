@@ -116,9 +116,12 @@ class ControllerModel {
             const card = $(this).closest(".card");
             const firstName = card.find(".player-first-name").text();
             const lastName = card.find(".player-last-name").text();
-            NBADataModel.GetPlayerStatsByFullName(firstName, lastName).then((playerStats) => {
-                console.log(playerStats);
+            NBADataModel.GetPlayerStatsByFullName(firstName, lastName)
+                .then((playerStats) => {
                 RenderModel.RenderPlayerStats(playerStats);
+            })
+                .catch(() => {
+                alert(`sorry... To ${firstName} ${lastName} no statistics`);
             });
         });
     }
