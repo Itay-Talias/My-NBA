@@ -11,11 +11,13 @@ MY-NBA - An application that displays an NBA team by team and year that a user e
 - Click on player card shows his statistic
 
 ## Technologies
-![HTML Icon](https://i.ibb.co/9tyHGr7/html-logo.png, "HTML")
-![CSS Icon](https://i.ibb.co/b3QNSgX/css-logo.png, "CSS")
-![TypeScript Icon](https://img.icons8.com/color/344/typescript.png, "TypeScript")
-![Python Icon](https://img.icons8.com/color/344/python--v1.png, "Python")
+<img align="left" alt="Pyton" width="50px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/python/python.png" />
+<img align="left" alt="Typescript" width="50px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/typescript/typescript.png" />
+<img align="left" alt="HTML" width="50px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/html/html.png" />
+<img align="left" alt="CSS" width="50px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/css/css.png" />
 
+<br />
+<br />
 
 ## Screenshots
 ### Initial page
